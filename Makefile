@@ -5,7 +5,7 @@
 ## Login   <durand_u@epitech.net>
 ## 
 ## Started on  Mon Mar  2 12:16:51 2015 Rémi DURAND
-## Last update Mon Mar  2 16:21:50 2015 Ambroise Coutarel
+## Last update Mon Mar  2 18:34:07 2015 Ambroise Coutarel
 ##
 
 SRC	=	lemipc.c	\
@@ -22,7 +22,7 @@ OBJ	=	$(SRC:.c=.o)
 
 NAME	=	lemipc
 
-CFLAGS	+=	-W -Wall -Wextra -Werror
+CFLAGS	+=	-W -Wall -Wextra -Werror -lncurses
 
 all: $(NAME)
 

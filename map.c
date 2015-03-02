@@ -5,7 +5,7 @@
 ** Login   <durand_u@epitech.net>
 ** 
 ** Started on  Mon Mar  2 12:52:16 2015 Rémi DURAND
-** Last update Mon Mar  2 18:13:32 2015 Rémi DURAND
+** Last update Mon Mar  2 18:26:54 2015 Ambroise Coutarel
 */
 
 #include "lemipc.h"
@@ -55,8 +55,8 @@ int	        find_offset(char *map)
 	++count;
       else
 	count = 0;
-      if (count == 8)
-	return (v - 6);
+      if (count == (NB_MINIONS + 1))
+	return (v - (NB_MINIONS - 1));
       ++v;
     }
   return (-1);
@@ -70,7 +70,7 @@ int		fill_map(char nb_player, char *map)
   v = 0;
   if ((offset = find_offset(map)) == (-1))
     return (-1);
-  while (v != 7)
+  while (v != NB_MINIONS)
     {
       map[offset + v] = nb_player;
       ++v;

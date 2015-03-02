@@ -5,7 +5,7 @@
 ** Login   <durand_u@epitech.net>
 ** 
 ** Started on  Mon Mar  2 12:38:35 2015 Rémi DURAND
-** Last update Mon Mar  2 18:15:24 2015 Rémi DURAND
+** Last update Mon Mar  2 18:45:47 2015 Ambroise Coutarel
 */
 
 #include "lemipc.h"
@@ -52,6 +52,7 @@ int	        init_player(int map_id, key_t key)
   char		nb_player;
   char		*addr;
 
+  initscr();
   addr = (char *)shmat(map_id, NULL, SHM_W | SHM_R);
   if (map_nb_minions(addr) >= ((MAP_SIZE / 3) * 2))
     return (-1);
