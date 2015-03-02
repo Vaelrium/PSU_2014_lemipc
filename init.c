@@ -5,12 +5,12 @@
 ** Login   <durand_u@epitech.net>
 ** 
 ** Started on  Mon Mar  2 12:38:35 2015 Rémi DURAND
-** Last update Mon Mar  2 13:21:23 2015 Rémi DURAND
+** Last update Mon Mar  2 13:54:35 2015 Rémi DURAND
 */
 
 #include "lemipc.h"
 
-int	        init_player(int shm_id)
+int	        init_player(int map_id)
 {
   char		nb_player;
   void		*addr;
