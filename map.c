@@ -5,7 +5,7 @@
 ** Login   <durand_u@epitech.net>
 ** 
 ** Started on  Mon Mar  2 12:52:16 2015 Rémi DURAND
-** Last update Mon Mar  2 13:57:07 2015 Rémi DURAND
+** Last update Mon Mar  2 14:19:47 2015 Rémi DURAND
 */
 
 #include "lemipc.h"
@@ -15,7 +15,7 @@ char		map_max(char *map)
   int		v;
   char		max;
 
-  max = 1;
+  max = 0;
   v = 0;
   while (v != MAP_SIZE)
     {
@@ -23,7 +23,7 @@ char		map_max(char *map)
 	max = map[v];
       ++v;
     }
-  return (max);
+  return (max + 1);
 }
 
 int		map_nb_minions(char *map)
