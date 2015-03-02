@@ -5,13 +5,14 @@
 ## Login   <durand_u@epitech.net>
 ## 
 ## Started on  Mon Mar  2 12:16:51 2015 Rémi DURAND
-## Last update Mon Mar  2 15:08:36 2015 Rémi DURAND
+## Last update Mon Mar  2 16:21:50 2015 Ambroise Coutarel
 ##
 
 SRC	=	lemipc.c	\
 		player.c	\
 		map.c		\
-		display.c
+		display.c	\
+		semaphore.c
 
 CC	=	gcc
 
