@@ -5,7 +5,7 @@
 ** Login   <durand_u@epitech.net>
 ** 
 ** Started on  Mon Mar  2 14:04:07 2015 Rémi DURAND
-** Last update Mon Mar  2 14:31:54 2015 Rémi DURAND
+** Last update Mon Mar  2 17:15:23 2015 Rémi DURAND
 */
 
 #include "lemipc.h"
@@ -19,13 +19,11 @@ void		display_map(char *map)
 {
   int		v;
 
-  v = 1;
-  while (v < (MAP_SIZE + 1))
+  v = 0;
+  while (v < MAP_SIZE)
     {
-      my_putchar(map[v - 1] + 48);
-      my_putchar(' ');
-      if ((v % 10) == 0 && v > 8)
-	my_putchar('\n');
-      ++v;
+      write(1, &map[v], MAP_SIDE);
+      my_putchar('\n');
+      v += 10;
     }
 }

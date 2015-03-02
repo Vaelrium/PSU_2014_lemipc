@@ -5,7 +5,7 @@
 ** Login   <durand_u@epitech.net>
 ** 
 ** Started on  Mon Mar  2 12:16:10 2015 Rémi DURAND
-** Last update Mon Mar  2 16:25:35 2015 Ambroise Coutarel
+** Last update Mon Mar  2 17:15:58 2015 Rémi DURAND
 */
 
 #ifndef _LEM_H_
@@ -31,5 +31,6 @@ int		fill_map(char nb_player, char *map);
 void		display_map(char *map);
 struct sembuf  	sembuf_init();
 int		sem_set(int sem_id, struct sembuf *ops, int value);
+void		init_map(int shm_id);
 
 #endif /* !_LEM_H_ */
