@@ -5,12 +5,13 @@
 ## Login   <durand_u@epitech.net>
 ## 
 ## Started on  Mon Mar  2 12:16:51 2015 Rémi DURAND
-## Last update Mon Mar  2 13:51:58 2015 Rémi DURAND
+## Last update Mon Mar  2 14:10:30 2015 Rémi DURAND
 ##
 
 SRC	=	lemipc.c	\
 		init.c		\
-		map.c
+		map.c		\
+		display.c
 
 CC	=	gcc
 
