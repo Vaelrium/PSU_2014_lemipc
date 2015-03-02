@@ -5,7 +5,7 @@
 ** Login   <durand_u@epitech.net>
 ** 
 ** Started on  Mon Mar  2 12:38:35 2015 Rémi DURAND
-** Last update Mon Mar  2 17:36:28 2015 Rémi DURAND
+** Last update Mon Mar  2 18:15:24 2015 Rémi DURAND
 */
 
 #include "lemipc.h"
@@ -22,7 +22,6 @@ int		algo_player(int nb_player, char *map, key_t key)
     {
       if (semctl(sm_q_id[0], 0, GETVAL) == (nb_player - 48))
 	{
-	  write(1, "JEFF\n", 5);
 	  sem_set(sm_q_id[0], &sops, -1);
 	}
     }

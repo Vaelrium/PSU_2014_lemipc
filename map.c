@@ -5,7 +5,7 @@
 ** Login   <durand_u@epitech.net>
 ** 
 ** Started on  Mon Mar  2 12:52:16 2015 Rémi DURAND
-** Last update Mon Mar  2 17:23:43 2015 Rémi DURAND
+** Last update Mon Mar  2 18:13:32 2015 Rémi DURAND
 */
 
 #include "lemipc.h"
@@ -55,8 +55,8 @@ int	        find_offset(char *map)
 	++count;
       else
 	count = 0;
-      if (count == 6)
-	return (v);
+      if (count == 8)
+	return (v - 6);
       ++v;
     }
   return (-1);
