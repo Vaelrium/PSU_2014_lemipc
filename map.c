@@ -5,7 +5,7 @@
 ** Login   <durand_u@epitech.net>
 ** 
 ** Started on  Mon Mar  2 12:52:16 2015 Rémi DURAND
-** Last update Mon Mar  2 18:26:54 2015 Ambroise Coutarel
+** Last update Tue Mar  3 14:49:06 2015 Rémi DURAND
 */
 
 #include "lemipc.h"
@@ -14,8 +14,10 @@ char		map_max(char *map)
 {
   int		v;
   char		max;
+  int		count;
 
   max = '0';
+  count = 0;
   v = 0;
   while (v != MAP_SIZE)
     {
@@ -23,7 +25,14 @@ char		map_max(char *map)
 	max = map[v];
       ++v;
     }
-  return (max + 1);
+  v = 0;
+  while (v != MAP_SIZE)
+    {
+      if (map[v] == max)
+	++count;
+      ++v;
+    }
+  return (count >= EQ_LIM ? max + 1 : max);
 }
 
 int		map_nb_minions(char *map)
@@ -45,36 +54,35 @@ int		map_nb_minions(char *map)
 int	        find_offset(char *map)
 {
   int		v;
-  int		count;
+  int		ret;
 
   v = 0;
-  count = 0;
+  while (v != 25)
+    {
+      ret = random() % 100;
+      if (map[ret] == '0')
+	return (ret);
+      ++v;
+    }
+  v = 0;
   while (v != MAP_SIZE)
     {
       if (map[v] == '0')
-	++count;
-      else
-	count = 0;
-      if (count == (NB_MINIONS + 1))
-	return (v - (NB_MINIONS - 1));
+	return (v);
       ++v;
     }
   return (-1);
 }
 
-int		fill_map(char nb_player, char *map)
+int		add_player(t_player *player, char *map)
 {
-  int		v;
   int		offset;
-
-  v = 0;
+  
   if ((offset = find_offset(map)) == (-1))
     return (-1);
-  while (v != NB_MINIONS)
-    {
-      map[offset + v] = nb_player;
-      ++v;
-    }
+  map[offset] = player->eq;
+  player->x = X(offset);
+  player->y = Y(offset);
   return (0);
 }
 
