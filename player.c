@@ -5,7 +5,7 @@
 ** Login   <durand_u@epitech.net>
 ** 
 ** Started on  Mon Mar  2 12:38:35 2015 Rémi DURAND
-** Last update Tue Mar  3 14:45:24 2015 Rémi DURAND
+** Last update Tue Mar  3 15:26:00 2015 Rémi DURAND
 */
 
 #include "lemipc.h"
@@ -20,12 +20,16 @@ int		algo_player(t_player *player, char *map, key_t key)
   sem_set(sm_q_id[0], &sops, 1);
   while (42)
     {
-      if (semctl(sm_q_id[0], 0, GETVAL) == (player->eq - 48))
+      sleep(1);
+      /*      if (semctl(sm_q_id[0], 0, GETVAL) == (player->eq - 48))
 	{
 	  sem_set(sm_q_id[0], &sops, -1);
-	}
+	  }*/
     }
   (void)map;
+  (void)player;
+  (void)sops;
+  (void)sm_q_id;
   return (0);
 }
 
@@ -38,13 +42,17 @@ int		algo_first(t_player *player, char *map, key_t key)
   sm_q_id[0] = semget(key, 1, IPC_CREAT | SHM_R | SHM_W);
   while (42)
     {
-      if (semctl(sm_q_id[0], 0, GETVAL) == player->eq)
-	{
-	  write(1, "\e[0;0H", 7);
-	  display_map(map);
-	  sem_set(sm_q_id[0], &sops, map_max(map) - 50);
-	}
+      /*      if (semctl(sm_q_id[0], 0, GETVAL) == player->eq)
+	{*/
+      write(1, "\e[0;0H", 7);
+      display_map(map);
+      sleep(1);
+	  //}
     }
+  (void)player;
+  (void)sops;
+  (void)sm_q_id;
+  return (0);
 }
 
 int		is_first(char *map)
