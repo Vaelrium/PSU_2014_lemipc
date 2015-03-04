@@ -5,7 +5,7 @@
 ** Login   <durand_u@epitech.net>
 ** 
 ** Started on  Mon Mar  2 12:16:10 2015 Rémi DURAND
-** Last update Wed Mar  4 14:18:15 2015 Rémi DURAND
+** Last update Wed Mar  4 15:23:03 2015 Ambroise Coutarel
 */
 
 #ifndef _LEM_H_
@@ -45,5 +45,6 @@ struct sembuf  	sembuf_init(int sem_num, int sem_op, int sem_flg);
 int		sem_set(int sem_id, struct sembuf *ops, int value);
 void		init_map(int shm_id);
 void	        moves(t_player *player, char *map);
+int		checkForEnemies(t_player *player, char *map, int block);
 
 #endif /* !_LEM_H_ */

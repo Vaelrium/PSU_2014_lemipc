@@ -5,7 +5,7 @@
 ## Login   <durand_u@epitech.net>
 ## 
 ## Started on  Mon Mar  2 12:16:51 2015 Rémi DURAND
-## Last update Wed Mar  4 14:18:28 2015 Rémi DURAND
+## Last update Wed Mar  4 15:22:19 2015 Ambroise Coutarel
 ##
 
 SRC	=	lemipc.c	\
@@ -13,7 +13,8 @@ SRC	=	lemipc.c	\
 		map.c		\
 		display.c	\
 		semaphore.c	\
-		move.c
+		move.c		\
+		perception.c
 
 CC	=	gcc
 
