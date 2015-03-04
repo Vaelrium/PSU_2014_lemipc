@@ -5,7 +5,7 @@
 ** Login   <durand_u@epitech.net>
 ** 
 ** Started on  Wed Mar  4 12:54:34 2015 Rémi DURAND
-** Last update Wed Mar  4 14:26:11 2015 Rémi DURAND
+** Last update Wed Mar  4 14:41:51 2015 Rémi DURAND
 */
 
 #include "lemipc.h"
@@ -41,7 +41,6 @@ int		find_enemies(t_player *player, char *map)
     --pos2;
   if (pos1 == 100 && pos2 == 0)
     return (-1);
-  printf("%d %d", pos1, pos2);
   return (pos1 < pos2 ? pos1 : pos2);
 }
 

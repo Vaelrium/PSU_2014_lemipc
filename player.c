@@ -5,7 +5,7 @@
 ** Login   <durand_u@epitech.net>
 ** 
 ** Started on  Mon Mar  2 12:38:35 2015 Rémi DURAND
-** Last update Wed Mar  4 14:17:45 2015 Rémi DURAND
+** Last update Wed Mar  4 14:37:51 2015 Rémi DURAND
 */
 
 #include "lemipc.h"
@@ -22,11 +22,11 @@ int		algo_player(t_player *player, char *map, key_t key)
       sem_set(sm_q_id[0], &sops, 0);
       sem_set(sm_q_id[0], &sops, 1);
       moves(player, map);
+      if (!player->not_dead)
+	map[(player->y * 10) + player->x] = '0';
       sem_set(sm_q_id[0], &sops, -1);
       usleep(300000);
     }
-  (void)map;
-  (void)player;
   return (0);
 }
 
@@ -45,10 +45,12 @@ int		algo_first(t_player *player, char *map, key_t key)
       sem_set(sm_q_id[0], &sops, 0);
       sem_set(sm_q_id[0], &sops, 1);
       moves(player, map);
+      if (!player->not_dead)
+	map[(player->y * 10) + player->x] = '0';
       sem_set(sm_q_id[0], &sops, -1);
       usleep(300000);
     }
-  (void)player;
+  while (1);
   return (0);
 }
 
