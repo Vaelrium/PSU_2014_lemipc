@@ -5,7 +5,7 @@
 ** Login   <durand_u@epitech.net>
 ** 
 ** Started on  Wed Mar  4 12:54:34 2015 Rémi DURAND
-** Last update Wed Mar  4 14:41:51 2015 Rémi DURAND
+** Last update Wed Mar  4 15:00:03 2015 Rémi DURAND
 */
 
 #include "lemipc.h"
@@ -30,18 +30,20 @@ int		enemies_around(t_player *player, char *map)
 
 int		find_enemies(t_player *player, char *map)
 {
-  int		pos1;
-  int		pos2;
+  int		pos;
+  int		en1;
+  int		en2;
 
-  pos1 = (player->y * 10) + player->x;
-  while (pos1 != MAP_SIZE && (map[pos1] == '0' || map[pos1] == player->eq))
-    ++pos1;
-  pos2 = (player->y * 10) + player->x;
-  while (pos2 != 0 && (map[pos2] == '0' || map[pos2] == player->eq))
-    --pos2;
-  if (pos1 == 100 && pos2 == 0)
+  pos = (player->y * 10) + player->x;
+  en1 = pos;
+  while (en1 != MAP_SIZE && (map[en1] == '0' || map[en1] == player->eq))
+    ++en1;
+  en2 = pos;
+  while (en2 != 0 && (map[en2] == '0' || map[en2] == player->eq))
+    --en2;
+  if (en1 == 100 && en2 == 0)
     return (-1);
-  return (pos1 < pos2 ? pos1 : pos2);
+  return ((en1 - pos) < (pos - en2) ? en1 : en2);
 }
 
 int		flank(int mover)
@@ -86,6 +88,7 @@ void	        moves(t_player *player, char *map)
   if (around >= 2)
     {
       player->not_dead = 0;
+      map[(player->y * 10) + player->x] = '0';
       return ;
     }
   else if (around == 1)

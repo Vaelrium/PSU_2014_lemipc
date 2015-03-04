@@ -4,9 +4,10 @@
 
 xfce4-terminal -e ./lemipc
 
-for var in {0..13}
+for var in {0..26}
 do
     ./lemipc&
+    sleep 0.1
 done
 
 ME=`whoami`
