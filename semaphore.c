@@ -5,12 +5,12 @@
 ** Login   <ganesha@epitech.net>
 **
 ** Started on  Mon Mar  2 15:53:47 2015 Ambroise Coutarel
-** Last update Wed Mar  4 10:36:38 2015 Ambroise Coutarel
+** Last update Wed Mar  4 10:46:09 2015 Rémi DURAND
 */
 
 #include "lemipc.h"
 
-struct sembuf	sembuf_init(int sem_num, int sem_flg, int sem_op)
+struct sembuf	sembuf_init(int sem_num, int sem_op, int sem_flg)
 {
   struct sembuf	ret;
 
