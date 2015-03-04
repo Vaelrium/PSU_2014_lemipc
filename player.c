@@ -5,7 +5,7 @@
 ** Login   <durand_u@epitech.net>
 ** 
 ** Started on  Mon Mar  2 12:38:35 2015 Rémi DURAND
-** Last update Wed Mar  4 12:45:25 2015 Rémi DURAND
+** Last update Wed Mar  4 14:17:45 2015 Rémi DURAND
 */
 
 #include "lemipc.h"
@@ -14,18 +14,16 @@ int		algo_player(t_player *player, char *map, key_t key)
 {
   int		sm_q_id[2];
   struct sembuf	sops;
-  int count = 0;
 
   sm_q_id[0] = semget(key, 0, SHM_R | SHM_W);
   sops = sembuf_init(0, 0, 0);
-  while (42)
+  while (player->not_dead)
     {
       sem_set(sm_q_id[0], &sops, 0);
       sem_set(sm_q_id[0], &sops, 1);
-      printf("Kikou n° %d\n", count);
+      moves(player, map);
       sem_set(sm_q_id[0], &sops, -1);
       usleep(300000);
-      ++count;
     }
   (void)map;
   (void)player;
@@ -36,21 +34,19 @@ int		algo_first(t_player *player, char *map, key_t key)
 {
   int		sm_q_id[2];
   struct sembuf	sops;
-  int count = 0;
 
   sm_q_id[0] = semget(key, 1, IPC_CREAT | SHM_R | SHM_W);
   sops = sembuf_init(0, -1, 0);
   sem_set(sm_q_id[0], &sops, -1);
-  while (42)
+  while (player->not_dead)
     {
       write(1, "\e[0;0H", 7);
       display_map(map);
       sem_set(sm_q_id[0], &sops, 0);
       sem_set(sm_q_id[0], &sops, 1);
-      printf("Kikou n° %d\n", count);
+      moves(player, map);
       sem_set(sm_q_id[0], &sops, -1);
-      usleep(100000);
-      ++count;
+      usleep(300000);
     }
   (void)player;
   return (0);
@@ -84,6 +80,7 @@ int	        init_player(int map_id, key_t key)
   if (map_nb_minions(addr) > 63)
     return (-1);
   player.eq = map_max(addr);
+  player.not_dead = 1;
   if (add_player(&player, addr) == (-1))
     return (-1);
   if (player.eq == '1' && is_first(addr) == 0)

@@ -5,7 +5,7 @@
 ** Login   <durand_u@epitech.net>
 ** 
 ** Started on  Mon Mar  2 12:16:10 2015 Rémi DURAND
-** Last update Wed Mar  4 10:46:41 2015 Rémi DURAND
+** Last update Wed Mar  4 14:18:15 2015 Rémi DURAND
 */
 
 #ifndef _LEM_H_
@@ -32,6 +32,7 @@ typedef struct	s_player
   char		x;
   char		y;
   char		eq;
+  char	        not_dead;
 }		t_player;
 
 int	        init_player(int shm_id, key_t key);
@@ -43,5 +44,6 @@ void		display_map(char *map);
 struct sembuf  	sembuf_init(int sem_num, int sem_op, int sem_flg);
 int		sem_set(int sem_id, struct sembuf *ops, int value);
 void		init_map(int shm_id);
+void	        moves(t_player *player, char *map);
 
 #endif /* !_LEM_H_ */
