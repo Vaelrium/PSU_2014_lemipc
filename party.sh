@@ -6,7 +6,7 @@ xfce4-terminal -e ./lemipc
 
 for var in {0..13}
 do
-    xfce4-terminal -e ./lemipc
+    ./lemipc&
 done
 
 ME=`whoami`
