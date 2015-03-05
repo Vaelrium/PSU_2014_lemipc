@@ -5,7 +5,7 @@
 ** Login   <durand_u@epitech.net>
 ** 
 ** Started on  Wed Mar  4 12:54:34 2015 Rémi DURAND
-** Last update Wed Mar  4 15:46:51 2015 Rémi DURAND
+** Last update Thu Mar  5 10:35:18 2015 Rémi DURAND
 */
 
 #include "lemipc.h"
@@ -13,18 +13,12 @@
 int		enemies_around(t_player *player, char *map)
 {
   int		ret;
-  int		pos;
 
   ret = 0;
-  pos = (player->y * 10) + player->x;
-  if (pos != 0 && map[pos - 1] != player->eq && map[pos - 1] != '0')
-    ++ret;
-  if (pos != 99 && map[pos + 1] != player->eq && map[pos + 1] != '0')
-    ++ret;
-  if ((pos + 10) <= 99 && map[pos + 10] != player->eq && map[pos + 10] != '0')
-    ++ret;
-  if ((pos - 10) >= 0 && map[pos - 10] != player->eq && map[pos - 10] != '0')
-    ++ret;
+  ret += checkForEnemies(player, map, 1);
+  ret += checkForEnemies(player, map, 9);
+  ret += checkForEnemies(player, map, 10);
+  ret += checkForEnemies(player, map, 11);
   return (ret);
 }
 
@@ -96,7 +90,7 @@ void	        moves(t_player *player, char *map)
   else
     {
       pos_en = find_enemies(player, map);
-      if (pos_en > 0)
+      if (pos_en >= 0)
 	move_to_pos(player, map, pos_en);
     }
 }

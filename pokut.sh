@@ -2,9 +2,9 @@
 
 (sleep 30; killall lemipc)&
 
-xfce4-terminal -e ./lemipc
+x-terminal-emulator -e ./lemipc
 
-for var in {0..20}
+for var in {0..41}
 do
     ./lemipc&
     sleep 0.1
@@ -24,6 +24,4 @@ for id in $IPCS_M
 do
     ipcrm -m $id;
 done
-
-#./lemipc
 
