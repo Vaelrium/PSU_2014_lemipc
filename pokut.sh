@@ -1,10 +1,11 @@
 #! /bin/bash
 
-(sleep 30; killall lemipc)&
+(sleep 30; killall ./lemipc)&
 
 x-terminal-emulator -e ./lemipc
+sleep 0.1
 
-for var in {0..41}
+for var in {0..12}
 do
     ./lemipc&
     sleep 0.1
@@ -25,3 +26,4 @@ do
     ipcrm -m $id;
 done
 
+clear

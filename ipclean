@@ -14,3 +14,5 @@ for id in $IPCS_M
 do
     ipcrm -m $id;
 done
+
+killall lemipc
