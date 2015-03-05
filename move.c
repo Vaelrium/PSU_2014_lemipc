@@ -5,7 +5,7 @@
 ** Login   <durand_u@epitech.net>
 ** 
 ** Started on  Wed Mar  4 12:54:34 2015 Rémi DURAND
-** Last update Thu Mar  5 10:35:18 2015 Rémi DURAND
+** Last update Thu Mar  5 11:00:40 2015 Rémi DURAND
 */
 
 #include "lemipc.h"
@@ -64,8 +64,12 @@ void		move_to_pos(t_player *player, char *map, int pos_en)
     mover = dif_en_x > 0 ? 1 : -1;
   else
     mover = dif_en_y > 0 ? 10 : -10;
+  if ((pos_p + mover) < 0 || (pos_p + mover) > 99)
+    return ;
   if (map[pos_p + mover] != '0')
     mover = flank(mover);
+  if ((pos_p + mover) < 0 || (pos_p + mover) > 99)
+    return ;
   if (map[pos_p + mover] != '0')
     return ;
   pos_p += mover;
@@ -85,6 +89,7 @@ void	        moves(t_player *player, char *map)
     {
       player->not_dead = 0;
       map[(player->y * 10) + player->x] = '0';
+      printf("\nIs dead / x : %d, y : %d, eq : %c, posmap : %d\n", player->x, player->y, player->eq, (player->y * 10) + player->x);
       return ;
     }
   else

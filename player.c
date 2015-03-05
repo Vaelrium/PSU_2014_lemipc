@@ -5,7 +5,7 @@
 ** Login   <durand_u@epitech.net>
 ** 
 ** Started on  Mon Mar  2 12:38:35 2015 Rémi DURAND
-** Last update Thu Mar  5 10:23:25 2015 Rémi DURAND
+** Last update Thu Mar  5 11:02:21 2015 Rémi DURAND
 */
 
 #include "lemipc.h"
@@ -44,7 +44,7 @@ int		algo_first(t_player *player, char *map, key_t key)
       sem_set(sm_q_id[0], &sops, 1);
       usleep(300000);
     }
-  while (1);
+  while (1)
   {
     write(1, "\e[0;0H", 7);
     display_map(map);
