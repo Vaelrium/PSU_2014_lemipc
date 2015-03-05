@@ -5,7 +5,7 @@
 ** Login   <ganesha@epitech.net>
 **
 ** Started on  Wed Mar  4 15:15:21 2015 Ambroise Coutarel
-** Last update Wed Mar  4 15:31:35 2015 Ambroise Coutarel
+** Last update Thu Mar  5 13:57:13 2015 Ambroise Coutarel
 */
 
 #include "lemipc.h"
@@ -25,4 +25,36 @@ int	checkForEnemies(t_player *player, char *map, int block)
     ++ret;
   
   return (ret);
+}
+
+void	sendMessage(int msgq_id, t_msg *msg, int remaining, long type)
+{
+  int	i;
+
+  i = 0;
+  msg->mtype = type;
+  msg->str[0] = '0';
+  while (i != remaining)
+    {
+      msgsnd(msgq_id, &msg, sizeof(t_msg), 0);
+      i++;
+    }
+}
+
+char	nbTeam(char *map)
+{
+  int	i;
+  char	first;
+
+  i = 0;
+  first = '0';
+  while (i != MAP_SIZE)
+    {
+      if (map[i] != '0')
+	{
+	  first = first == '0' ? map[i] : (-1);
+	}
+      i++;
+    }
+  return (first);
 }

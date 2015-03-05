@@ -5,7 +5,7 @@
 ** Login   <durand_u@epitech.net>
 ** 
 ** Started on  Wed Mar  4 12:54:34 2015 Rémi DURAND
-** Last update Thu Mar  5 12:36:06 2015 Rémi DURAND
+** Last update Thu Mar  5 14:13:41 2015 Ambroise Coutarel
 */
 
 #include "lemipc.h"
@@ -84,10 +84,11 @@ void		move_to_pos(t_player *player, char *map, int pos_en)
   player->y = Y(pos_p);
 }
 
-void	        moves(t_player *player, char *map)
+void	        moves(t_player *player, char *map, int msgq_id)
 {
   int		pos_en;
   int		around;
+  t_msg		msg;
 
   around = enemies_around(player, map);
   if (around >= 2)
@@ -101,5 +102,11 @@ void	        moves(t_player *player, char *map)
       pos_en = find_enemies(player, map);
       if (pos_en >= 0 && pos_en < 100)
 	move_to_pos(player, map, pos_en);
+      else if (pos_en == (-1))
+	{
+	  printf("NOTJEFF\n");
+	  msgrcv(msgq_id, &msg,  sizeof(msg), 42, 0);
+	  player->not_dead = -1;
+	}
     }
 }
