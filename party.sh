@@ -1,10 +1,8 @@
 #! /bin/bash
 
-(sleep 30; killall lemipc)&
-
 xfce4-terminal -e ./lemipc
 
-for var in {0..100}
+for var in {0..20}
 do
     ./lemipc&
     sleep 0.1
@@ -14,6 +12,7 @@ ME=`whoami`
 
 IPCS_S=`ipcs -s | egrep "0x[0-9a-f]+ [0-9]+" | grep $ME | cut -f2 -d" "`
 IPCS_M=`ipcs -m | egrep "0x[0-9a-f]+ [0-9]+" | grep $ME | cut -f2 -d" "`
+IPCS_Q=`ipcs -q | egrep "0x[0-9a-f]+ [0-9]+" | grep $ME | cut -f2 -d" "`
 
 for id in $IPCS_S 
 do
@@ -23,6 +22,11 @@ done
 for id in $IPCS_M 
 do
     ipcrm -m $id;
+done
+
+for id in $IPCS_Q 
+do
+    ipcrm -q $id;
 done
 
 #./lemipc

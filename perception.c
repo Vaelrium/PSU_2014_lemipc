@@ -5,7 +5,7 @@
 ** Login   <ganesha@epitech.net>
 **
 ** Started on  Wed Mar  4 15:15:21 2015 Ambroise Coutarel
-** Last update Thu Mar  5 13:57:13 2015 Ambroise Coutarel
+** Last update Thu Mar  5 15:06:02 2015 Rémi DURAND
 */
 
 #include "lemipc.h"
@@ -22,8 +22,7 @@ int	checkForEnemies(t_player *player, char *map, int block)
     ++ret;
   if ((pos + block) <= 99 && map[pos + block] != player->eq && 
       map[pos + block] != '0')
-    ++ret;
-  
+    ++ret;  
   return (ret);
 }
 
@@ -50,11 +49,11 @@ char	nbTeam(char *map)
   first = '0';
   while (i != MAP_SIZE)
     {
-      if (map[i] != '0')
-	{
-	  first = first == '0' ? map[i] : (-1);
-	}
-      i++;
+      if (map[i] != '0' && first == '0')
+	first = map[i];
+      if (first != map[i] && map[i] != '0')
+	return (0);
+      ++i;
     }
-  return (first);
+  return (-1);
 }

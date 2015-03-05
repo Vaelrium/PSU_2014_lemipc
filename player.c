@@ -5,7 +5,7 @@
 ** Login   <durand_u@epitech.net>
 ** 
 ** Started on  Mon Mar  2 12:38:35 2015 Rémi DURAND
-** Last update Thu Mar  5 14:13:27 2015 Ambroise Coutarel
+** Last update Thu Mar  5 15:26:24 2015 Rémi DURAND
 */
 
 #include "lemipc.h"
@@ -14,7 +14,6 @@ int		algo_player(t_player *player, char *map, key_t key)
 {
   int		sm_q_id[2];
   struct sembuf	sops;
-  t_msg		msg;
 
   sm_q_id[0] = semget(key, 0, SHM_R | SHM_W);
   sm_q_id[1] = msgget(key, SHM_R | SHM_W);
@@ -25,11 +24,6 @@ int		algo_player(t_player *player, char *map, key_t key)
       moves(player, map, sm_q_id[1]);
       sem_set(sm_q_id[0], &sops, 1);
       usleep(300000);
-    }
-  if (player->not_dead == 0 && nbTeam(map) != (-1))
-    {
-      printf("JEFF\n");
-      msgsnd(sm_q_id[1], &msg, 1, 42);
     }
   return (0);
 }
@@ -51,10 +45,10 @@ int		algo_first(t_player *player, char *map, key_t key)
       sem_set(sm_q_id[0], &sops, 1);
       first_aff(map);
     }
-  while (nbTeam(map) != (-1) && 
-	 msgrcv(sm_q_id[1], &msg, 42, sizeof(msg), 0) == -1)
+  while (player->not_dead == 0 && nbTeam(map) == 0 && 
+	 msgrcv(sm_q_id[1], &msg, sizeof(msg), 42, IPC_NOWAIT) == -1)
     first_aff(map);
-  sendMessage(sm_q_id[1], &msg, map_nb_minions(map), 42);
+  first_aff(map);
   msgctl(sm_q_id[1], IPC_RMID, NULL);
   semctl(sm_q_id[0], IPC_RMID, 0);
   return (0);
@@ -95,6 +89,7 @@ int	        init_player(int map_id, key_t key)
     {
       write(1, "\e[0;0H\e[2J\e[?25l", 19);
       algo_first(&player, addr, key);
+      write(1, "\e[?24h", 6);
     }
   else
     algo_player(&player, addr, key);
