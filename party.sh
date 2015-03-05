@@ -4,7 +4,7 @@
 
 xfce4-terminal -e ./lemipc
 
-for var in {0..20}
+for var in {0..100}
 do
     ./lemipc&
     sleep 0.1

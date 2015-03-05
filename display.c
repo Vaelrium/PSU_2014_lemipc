@@ -5,7 +5,7 @@
 ** Login   <durand_u@epitech.net>
 ** 
 ** Started on  Mon Mar  2 14:04:07 2015 Rémi DURAND
-** Last update Mon Mar  2 17:15:23 2015 Rémi DURAND
+** Last update Thu Mar  5 12:59:26 2015 Rémi DURAND
 */
 
 #include "lemipc.h"
@@ -26,4 +26,11 @@ void		display_map(char *map)
       my_putchar('\n');
       v += 10;
     }
+}
+
+void		first_aff(char *map)
+{
+  write(1, "\e[0;0H", 7);
+  display_map(map);
+  usleep(300000);
 }

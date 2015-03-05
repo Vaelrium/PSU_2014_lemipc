@@ -5,7 +5,7 @@
 ** Login   <durand_u@epitech.net>
 ** 
 ** Started on  Mon Mar  2 12:52:16 2015 Rémi DURAND
-** Last update Tue Mar  3 15:26:03 2015 Rémi DURAND
+** Last update Thu Mar  5 12:56:02 2015 Rémi DURAND
 */
 
 #include "lemipc.h"
@@ -78,7 +78,7 @@ int		add_player(t_player *player, char *map)
 {
   int		offset;
   
-  if ((offset = find_offset(map)) == (-1))
+  if (player->eq > '9' || (offset = find_offset(map)) == (-1))
     return (-1);
   map[offset] = player->eq;
   player->x = X(offset);
