@@ -5,7 +5,7 @@
 ** Login   <durand_u@epitech.net>
 ** 
 ** Started on  Mon Mar  2 12:16:10 2015 Rémi DURAND
-** Last update Wed Mar  4 14:18:15 2015 Rémi DURAND
+** Last update Thu Mar  5 10:31:38 2015 Rémi DURAND
 */
 
 #ifndef _LEM_H_

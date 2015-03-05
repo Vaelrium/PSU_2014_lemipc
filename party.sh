@@ -1,12 +1,12 @@
 #! /bin/bash
 
-(sleep 30; killall lemipc)&
+(sleep 30; killall valgrind lemipc)&
 
 xfce4-terminal -e ./lemipc
 
 for var in {0..20}
 do
-    ./lemipc&
+    valgrind ./lemipc&
     sleep 0.1
 done
 
