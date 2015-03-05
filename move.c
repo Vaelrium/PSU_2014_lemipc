@@ -5,7 +5,7 @@
 ** Login   <durand_u@epitech.net>
 ** 
 ** Started on  Wed Mar  4 12:54:34 2015 Rémi DURAND
-** Last update Thu Mar  5 11:29:23 2015 Ambroise Coutarel
+** Last update Thu Mar  5 12:36:06 2015 Rémi DURAND
 */
 
 #include "lemipc.h"
@@ -33,11 +33,16 @@ int		find_enemies(t_player *player, char *map)
   while (en1 < MAP_SIZE && (map[en1] == '0' || map[en1] == player->eq))
     ++en1;
   en2 = pos;
-  while (en2 > 0 && (map[en2] == '0' || map[en2] == player->eq))
+  while (en2 >= 0 && (map[en2] == '0' || map[en2] == player->eq))
     --en2;
   if (en1 == 100 && en2 == -1)
     return (-1);
-  return ((en1 - pos) < (pos - en2) ? en1 : en2);
+  else if (en1 == 100)
+    return (en2);
+  else if (en2 == -1)
+    return (en1);
+  else
+    return ((en1 - pos) < (pos - en2) ? en1 : en2);
 }
 
 int		flank(int mover)
@@ -65,28 +70,18 @@ void		move_to_pos(t_player *player, char *map, int pos_en)
   else
     mover = dif_en_y > 0 ? 10 : -10;
   if ((pos_p + mover) < 0 || (pos_p + mover) > 99)
-    {
-      printf("Player with PID %d from team %c is trying to move out of the game area to x : %d y : %d\n", getpid() ,player->eq, X(pos_p + mover), Y(pos_p + mover));
-      return ;
-    }
+    return ;
   if (map[pos_p + mover] != '0')
     mover = flank(mover);
   if ((pos_p + mover) < 0 || (pos_p + mover) > 99)
-    {
-      printf("Player with PID %d from team %c is tried to flank out of the game area\n", getpid() ,player->eq);
-      return ;
-    }
+    return ;
   if (map[pos_p + mover] != '0')
-    {
-      printf("Player with PID %d from team %c is trying to move to a busy square\n", getpid() ,player->eq);
-      return ;
-    }
+    return ;
   pos_p += mover;
   map[pos_p] = player->eq;
   map[(player->y * 10) + player->x] = '0';
   player->x = X(pos_p);
   player->y = Y(pos_p);
-  printf("Player with PID %d from team %c moves to x : %d y : %d\n", getpid() ,player->eq,player->x, player->y);
 }
 
 void	        moves(t_player *player, char *map)
@@ -99,13 +94,11 @@ void	        moves(t_player *player, char *map)
     {
       player->not_dead = 0;
       map[(player->y * 10) + player->x] = '0';
-      printf("Player with PID %d from team %c died at x : %d y : %d and will be removed\n", getpid() ,player->eq,player->x, player->y);
       return ;
     }
   else
     {
       pos_en = find_enemies(player, map);
-      printf("Player with PID %d from team %c at x : %d y : %d moticed an enemy at square %d\n", getpid(), player->eq, player->x, player->y, pos_en);
       if (pos_en >= 0 && pos_en < 100)
 	move_to_pos(player, map, pos_en);
     }
