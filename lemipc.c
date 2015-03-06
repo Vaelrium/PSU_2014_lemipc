@@ -5,7 +5,7 @@
 ** Login   <durand_u@epitech.net>
 ** 
 ** Started on  Mon Mar  2 12:14:48 2015 Rémi DURAND
-** Last update Thu Mar  5 15:16:52 2015 Rémi DURAND
+** Last update Fri Mar  6 17:31:58 2015 Ambroise Coutarel
 */
 
 #include "lemipc.h"
@@ -26,8 +26,6 @@ int		main()
       init_map(shm_id);
       if (init_player(shm_id, key) == (-1))
 	return (-1);
-      write(1, "End\n", 4);
-      sleep(5);
       shmctl(shm_id, IPC_RMID, NULL);
     }
   else if (init_player(shm_id, key) == (-1))

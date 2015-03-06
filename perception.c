@@ -5,7 +5,7 @@
 ** Login   <ganesha@epitech.net>
 **
 ** Started on  Wed Mar  4 15:15:21 2015 Ambroise Coutarel
-** Last update Thu Mar  5 15:06:02 2015 Rémi DURAND
+** Last update Fri Mar  6 17:31:04 2015 Ambroise Coutarel
 */
 
 #include "lemipc.h"
@@ -29,13 +29,21 @@ int	checkForEnemies(t_player *player, char *map, int block)
 void	sendMessage(int msgq_id, t_msg *msg, int remaining, long type)
 {
   int	i;
+  t_msg	test;
 
+  (void)msg;
   i = 0;
-  msg->mtype = type;
-  msg->str[0] = '0';
+  bzero(&test, sizeof(t_msg));
+  //printf("Using message queue %d\n", msgq_id);
   while (i != remaining)
     {
-      msgsnd(msgq_id, &msg, sizeof(t_msg), 0);
+      test.mtype = type;
+      //sprintf(test.mtext, "JEFF!!!");
+      msgsnd(msgq_id, &test, sizeof(t_msg), 0);
+      /* if (msgsnd(msgq_id, &test, sizeof(t_msg), 0) == (-1)) */
+      /* 	printf("ERROR : %s, message type : %ld\n", strerror(errno), test.mtype); */
+      /* else */
+      /* 	printf("Message %ld sent with success\n", test.mtype); */
       i++;
     }
 }
@@ -56,4 +64,12 @@ char	nbTeam(char *map)
       ++i;
     }
   return (-1);
+}
+
+void	affEnd(int sm_q_id[2])
+{
+  write(1, "End\n", 4);
+  sleep(5);
+  semctl(sm_q_id[0], IPC_RMID, 0);
+  msgctl(sm_q_id[1], IPC_RMID, NULL);
 }

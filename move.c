@@ -5,7 +5,7 @@
 ** Login   <durand_u@epitech.net>
 ** 
 ** Started on  Wed Mar  4 12:54:34 2015 Rémi DURAND
-** Last update Thu Mar  5 15:34:41 2015 Rémi DURAND
+** Last update Fri Mar  6 17:20:08 2015 Ambroise Coutarel
 */
 
 #include "lemipc.h"
@@ -96,7 +96,7 @@ void	        moves(t_player *player, char *map, int msgq_id)
       player->not_dead = 0;
       map[(player->y * 10) + player->x] = '0';
       if (nbTeam(map) == (-1))
-	sendMessage(msgq_id, &msg, 1, 42);
+	sendMessage(msgq_id, &msg, 1 + map_nb_minions(map), 42);
       return ;
     }
   else
@@ -104,15 +104,17 @@ void	        moves(t_player *player, char *map, int msgq_id)
       pos_en = find_enemies(player, map);
       if (pos_en >= 0 && pos_en < 100)
 	move_to_pos(player, map, pos_en);
-      else if (pos_en == (-1))
+      else if (pos_en == (-1) && nbTeam(map) != 0)
 	{
-	  if (msgrcv(msgq_id, &msg, sizeof(msg), 42, IPC_NOWAIT) != -1)
-	    {
-	      printf("Time to go(%d) !\n", player->eq);
-	      player->not_dead = -1;
-	    }
-	  else
-	    printf("What ? (%d) !\n", player->eq);
+	  if (msgrcv(msgq_id, &msg, sizeof(t_msg), 42, IPC_NOWAIT) != -1)
+	    player->not_dead = -1;
+	  /* if (msgrcv(msgq_id, &msg, sizeof(t_msg), 42, IPC_NOWAIT) == -1) */
+	  /*   printf("ERROR : %s\n", strerror(errno)); */
+	  /* else */
+	  /*   { */
+	  /*     //printf("Time to go(%d) !\n", player->eq); */
+	  /*     player->not_dead = -1; */
+	  /*   } */
 	}
     }
 }

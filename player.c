@@ -5,7 +5,7 @@
 ** Login   <durand_u@epitech.net>
 ** 
 ** Started on  Mon Mar  2 12:38:35 2015 Rémi DURAND
-** Last update Thu Mar  5 15:26:24 2015 Rémi DURAND
+** Last update Fri Mar  6 17:31:55 2015 Ambroise Coutarel
 */
 
 #include "lemipc.h"
@@ -45,12 +45,14 @@ int		algo_first(t_player *player, char *map, key_t key)
       sem_set(sm_q_id[0], &sops, 1);
       first_aff(map);
     }
-  while (player->not_dead == 0 && nbTeam(map) == 0 && 
-	 msgrcv(sm_q_id[1], &msg, sizeof(msg), 42, IPC_NOWAIT) == -1)
+  while (msgrcv(sm_q_id[1], &msg, sizeof(t_msg), 42, IPC_NOWAIT) == -1)
     first_aff(map);
   first_aff(map);
-  msgctl(sm_q_id[1], IPC_RMID, NULL);
-  semctl(sm_q_id[0], IPC_RMID, 0);
+  sendMessage(sm_q_id[1], &msg, map_nb_minions(map), 42);
+  affEnd(sm_q_id);
+  /* sleep(3); */
+  /* semctl(sm_q_id[0], IPC_RMID, 0); */
+  /* msgctl(sm_q_id[1], IPC_RMID, NULL); */
   return (0);
 }
 

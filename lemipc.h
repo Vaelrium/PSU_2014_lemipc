@@ -5,7 +5,7 @@
 ** Login   <durand_u@epitech.net>
 ** 
 ** Started on  Mon Mar  2 12:16:10 2015 Rémi DURAND
-** Last update Thu Mar  5 14:05:22 2015 Ambroise Coutarel
+** Last update Fri Mar  6 17:33:44 2015 Ambroise Coutarel
 */
 
 #ifndef _LEM_H_
@@ -21,6 +21,8 @@
 # include <stdio.h>
 # include <time.h>
 # include <stdlib.h>
+# include <errno.h>
+# include <string.h>
 
 # define MAP_SIDE 10
 # define MAP_SIZE 100
@@ -39,8 +41,6 @@ typedef struct	s_player
 typedef struct	s_msg
 {
   long		mtype;
-  char		str[1];
-  
 }		t_msg;
 
 int	        init_player(int shm_id, key_t key);
@@ -57,5 +57,6 @@ int		checkForEnemies(t_player *player, char *map, int block);
 void		first_aff(char *map);
 void		sendMessage(int msgq_id, t_msg *msg, int remaining, long type);
 char		nbTeam(char *map);
+void		affEnd(int sm_q_id[2]);
 
 #endif /* !_LEM_H_ */
